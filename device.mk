@@ -8,7 +8,7 @@
 $(call inherit-product, device/xiaomi/mt6895-common/mt6895-common.mk)
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/xiaomi/xaga/xaga-vendor.mk)
+$(call inherit-product, vendor/xiaomi/rubens/rubens-vendor.mk)
 
 # Dolby
 PRODUCT_COPY_FILES += \
@@ -29,18 +29,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/uinput-fpc.kl \
     $(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/uinput-goodix.kl
 
-# MIUI Camera
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.miui.notch=1 \
-    ro.product.mod_device=xaga_global \
-    camera.lab.options=true
-
 # Overlays
 PRODUCT_PACKAGES += \
     FrameworkResOverlay \
-    XagaProFrameworkResOverlay \
+    # TODO: 如果 rubens 有 Pro 变型，将下面两行改为对应名称；如无变型，删除这两行
     SystemUIOverlay \
-    XagaProInFrameworkResOverlay \
     SettingsOverlay
 
 DEVICE_PACKAGE_OVERLAYS += \

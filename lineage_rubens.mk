@@ -11,23 +11,27 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common LineageOS stuff
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Inherit from xaga device
-$(call inherit-product, device/xiaomi/xaga/device.mk)
+# Inherit from rubens device
+$(call inherit-product, device/xiaomi/rubens/device.mk)
 
-PRODUCT_DEVICE := xaga
-PRODUCT_NAME := lineage_xaga
+PRODUCT_DEVICE := rubens
+PRODUCT_NAME := lineage_rubens
+# TODO: 填写 rubens 的品牌（Redmi / POCO / Xiaomi）
 PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := Redmi Note11T Pro
+# TODO: 填写 rubens 的型号名称（如 Redmi Note 11 Pro+ 5G 等）
+PRODUCT_MODEL := Redmi K50
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 2460
-TARGET_SCREEN_WIDTH := 1080
-TARGET_BOOT_ANIMATION_RES := 1080
+# TODO: 如果 rubens 分辨率不同，修改以下三项
+TARGET_SCREEN_HEIGHT := 3200
+TARGET_SCREEN_WIDTH := 1440
+TARGET_BOOT_ANIMATION_RES := 1440
 
-TARGET_SCREEN_DENSITY := 440
+# TODO: 如果 rubens 屏幕密度不同，修改以下项
+TARGET_SCREEN_DENSITY := 560
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 

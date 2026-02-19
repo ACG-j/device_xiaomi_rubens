@@ -28,10 +28,6 @@
  */
 
 #include <stdlib.h>
-#include <fstream>
-#include <string.h>
-#include <sys/sysinfo.h>
-#include <unistd.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
@@ -39,16 +35,7 @@
 #include "property_service.h"
 #include "vendor_init.h"
 
-using android::base::GetProperty;
-using android::base::SetProperty;
 using std::string;
-
-char const *heapstartsize;
-char const *heapgrowthlimit;
-char const *heapsize;
-char const *heapminfree;
-char const *heapmaxfree;
-char const *heaptargetutilization;
 
 void property_override(string prop, string value)
 {
@@ -60,88 +47,43 @@ void property_override(string prop, string value)
         __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
 }
 
-void check_device()
+void load_dalvik_properties()
 {
-    struct sysinfo sys;
+    // 8GB & 12GB RAM
+    property_override("dalvik.vm.heapstartsize", "32m");
+    property_override("dalvik.vm.heapgrowthlimit", "512m");
+    property_override("dalvik.vm.heapsize", "768m");
+    property_override("dalvik.vm.heapmaxfree", "64m");
+    property_override("dalvik.vm.heaptargetutilization", "0.5");
+    property_override("dalvik.vm.heapminfree", "8m");
+}
 
-    sysinfo(&sys);
-
-    if (sys.totalram > 5072ull * 1024 * 1024) {
-        // from - phone-xhdpi-6144-dalvik-heap.mk
-        heapstartsize = "16m";
-        heapgrowthlimit = "256m";
-        heapsize = "512m";
-        heaptargetutilization = "0.5";
-        heapminfree = "8m";
-        heapmaxfree = "32m";
-    } else {
-        // from - phone-xxhdpi-4096-dalvik-heap.mk
-        heapstartsize = "8m";
-        heapgrowthlimit = "192m";
-        heapsize = "512m";
-        heaptargetutilization = "0.6";
-        heapminfree = "8m";
-        heapmaxfree = "16m";
-    }
+void load_miuicamera_properties()
+{
+    // Miui Camera
+    property_override("ro.miui.notch", "1");
+    property_override("camera.lab.options", "true");
+    property_override("ro.product.mod_device", "rubens_global");
+    property_override("vendor.camera.aux.packagelist", "com.android.camera");
+    property_override("persist.vendor.camera.privapp.list", "com.android.camera");
+    property_override("ro.com.google.lens.oem_camera_package", "com.android.camera");
 }
 
 void vendor_load_properties()
 {
-    // dalvik
-    check_device();
-    property_override("dalvik.vm.heapstartsize", heapstartsize);
-    property_override("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    property_override("dalvik.vm.heapsize", heapsize);
-    property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    property_override("dalvik.vm.heapminfree", heapminfree);
-    property_override("dalvik.vm.heapmaxfree", heapmaxfree);
-
-    string brand = "Redmi";
-    string model;
-    string marketname;
-
-    string region = GetProperty("ro.boot.hwc", "");
-    string board = GetProperty("ro.boot.product.hardware.sku", "");
-    string name = board;
-    
-    property_override("ro.product.board", board);
-    property_override("ro.product.device", board);
-    property_override("ro.product.vendor.device", board);
-
-    if (board == "xaga") {
-        if (region == "CN") {
-            model = "22041216C";
-            marketname = "Redmi Note 11T Pro";
-        } else {
-            brand = "POCO";
-            model = "22041216G";
-            marketname = "POCO X4 GT";
-            name = "xaga_global";
-        }
-    } else if (board == "xagapro") {
-        if (region == "CN") {
-            model = "22041216UC";
-            marketname = "Redmi Note 11T Pro+";
-        } else {
-            brand = "POCO";
-            model = "22041216UG";
-            marketname = "POCO X4 GT Pro";
-            name = "xagapro_global";
-        }
-    } else if (board == "xagain") {
-        model = "22041216I";
-        marketname = "Redmi K50i";
-    } else if (board == "xagaproin") {
-        model = "22041216UI";
-        marketname = "Redmi K50i Pro";
-    }
+    load_dalvik_properties();
+    load_miuicamera_properties();
 
     // Override all partitions' props
-    string prop_partitions[] = {"", "odm.", "vendor."};
-    for (const string &prop : prop_partitions) {
-        property_override(string("ro.product.") + prop + string("brand"), brand);
-        property_override(string("ro.product.") + prop + string("model"), model);
-        property_override(string("ro.product.") + prop + string("marketname"), marketname);
-        property_override(string("ro.product.") + prop + string("name"), name);
+    string prop_partitions[] = {"", "vendor.", "odm."};
+    for (const string &prop : prop_partitions)
+    {
+        property_override(string("ro.product.") + prop + string("brand"), "Redmi");
+        property_override(string("ro.product.") + prop + string("name"), "rubens");
+        property_override(string("ro.product.") + prop + string("device"), "rubens");
+        property_override(string("ro.product.") + prop + string("model"), "22041211AC");
+        property_override(string("ro.product.") + prop + string("marketname"), "Redmi K50");
     }
+
+    property_override("ro.oem_unlock_supported", "0");
 }

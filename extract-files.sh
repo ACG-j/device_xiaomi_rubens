@@ -14,7 +14,7 @@ fi
 
 set -e
 
-export DEVICE=xaga
+export DEVICE=rubens
 export DEVICE_COMMON=mt6895-common
 export VENDOR=xiaomi
 
