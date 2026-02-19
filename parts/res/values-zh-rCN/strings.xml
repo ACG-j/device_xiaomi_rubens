@@ -21,4 +21,13 @@
 
     <string name="gpu_max_frequency">GPU 最高频率</string>
 
+         <!-- DC dimming settings -->
+     <string name="dc_dimming_enable_title">防闪烁模式</string>
+     <string name="dc_dimming_enable_summary">防闪烁模式可减少弱光条件下的眼睛疲劳\n注意：这可能会降低图像质量，关闭并重新打开屏幕以生效。</string>
+     <string name="dc_dimming_enable_summary_not_supported">当前内核目前不支持防闪烁模式</string>
+
+     <!--Display settings fragment -->
+     <string name="display_settings_title">显示模式</string>
+     <string name="display_settings_summary">调整屏幕的设置和偏好</string>
+
 </resources>

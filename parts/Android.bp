@@ -21,6 +21,9 @@ android_app {
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+    required: [
+        "disp_feature"
+    ],
 }
 
 prebuilt_etc {
@@ -28,4 +31,14 @@ prebuilt_etc {
     src: "gpu_optimizer.rc",
     sub_dir: "init",
     vendor: true,
+}
+
+cc_binary {
+	name: "disp_feature",
+	srcs: [
+		"disp_feature.cpp",
+	],
+    header_libs: [
+        "generated_kernel_headers",
+    ],
 }
