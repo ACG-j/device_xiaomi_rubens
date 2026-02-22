@@ -150,7 +150,6 @@ vendor/etc/camera/deblur_sd_opencl_binary.bin
 vendor/etc/camera/deblur_sd_opencl_params.bin
 vendor/etc/camera/deblur_txt_apu.bin
 vendor/etc/camera/F1_pink.cng
-vendor/etc/camera/gma_custom.xml:vendor/etc/camera/gma_custom.txt;SYMLINK=vendor/etc/camera/gma_custom.xml
 vendor/etc/camera/ldc/intsense_config_undistort.bin
 vendor/etc/camera/ldc/ldc_cap_cache
 vendor/etc/camera/ldc/ldc_cap_model
@@ -626,11 +625,8 @@ vendor/firmware/wifi.cfg
 
 # Miscellaneous
 vendor/bin/FlashCompareAPI
-vendor/etc/device_sar_config.xml
-vendor/etc/dsi_l16_36_02_0b_dsc_vdo_mi.xml
-vendor/etc/dsi_l16_42_02_0a_dsc_vdo_mi.xml
 vendor/etc/init/ddr_training.rc
-vendor/etc/init/xaga_display.rc
+vendor/etc/init/rubens_display.rc
 vendor/lib/c2.dolby.avc.dec.so
 vendor/lib/c2.dolby.avc.sec.dec.so
 vendor/lib/c2.dolby.client.so
@@ -641,7 +637,6 @@ vendor/lib/c2.dolby.store.so
 vendor/lib/libai_sdr2hdr_auth.so
 vendor/lib/libdolbyottcameracontrol.so
 vendor/lib/libdolbyvision.so
-vendor/lib64/com.xiaomi.plugin.hdr.so
 vendor/lib64/libai_sdr2hdr_auth.so
 vendor/lib64/libflash_compare.so
 
