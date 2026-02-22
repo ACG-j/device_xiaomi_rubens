@@ -38,10 +38,6 @@ PRODUCT_PACKAGES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage
     
-# Recovery
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/modules/modules.load.recovery:recovery/root/lib/modules/modules.load.recovery
-
 # Rootdir
 PRODUCT_PACKAGES += \
     init.project.rc \
