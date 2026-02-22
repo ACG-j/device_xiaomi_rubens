@@ -32,7 +32,6 @@ PRODUCT_COPY_FILES += \
 # Overlays
 PRODUCT_PACKAGES += \
     FrameworkResOverlay \
-    # TODO: 如果 rubens 有 Pro 变型，将下面两行改为对应名称；如无变型，删除这两行
     SystemUIOverlay \
     SettingsOverlay
 
