@@ -2,3 +2,5 @@ prebuilts/odm.img
 prebuilts/vendor.img
 .claude
 a14
+filter_lines.py
+test.txt
