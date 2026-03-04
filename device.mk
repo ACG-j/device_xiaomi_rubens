@@ -38,10 +38,6 @@ PRODUCT_PACKAGES += \
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage
     
-# Rootdir
-PRODUCT_PACKAGES += \
-    init.project.rc \
-    meta_init.rc
 
 # Xiaomi Parts
 PRODUCT_PACKAGES += \
